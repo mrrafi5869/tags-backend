@@ -1,23 +1,19 @@
 const mongoose = require("mongoose");
-const TasksSubmissionDetails = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    email: {
-      type: String,
-      unique: true,
-    },
-    tag: {
-      type: String,
-      unique: true,
-    },
-    task: {
-      type: String,
-      unique: true,
-    },
-    uniqueCode: { type: Number, required: false, default: 1 }
-  }
-);
 
-const TasksSubmission = mongoose.model("TasksSubmission", TasksSubmissionDetails);
+const TasksSubmissionSchema = new mongoose.Schema({
+  name: { type: String },
+  email: { type: String, required: true }, // Remove unique: true
+  tag: { type: String },
+  task: {
+    taskName: { type: String },
+    taskDescription: { type: String },
+  },
+  uniqueCode: { type: Number, default: 1 },
+});
+
+const TasksSubmission = mongoose.model(
+  "TasksSubmission",
+  TasksSubmissionSchema
+);
 
 module.exports = TasksSubmission;

@@ -5,11 +5,11 @@ require("dotenv").config();
 
 const getTagAndTask = async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await TagsAndTask.findById(id);
+ const { uniqueCode } = req.params;
+    const tagAndTask = await TagsAndTask.findOne({ class: uniqueCode }); 
     res.status(200).json({
       message: "Tag And Task get successfully",
-      data: user,
+      data: tagAndTask,
     });
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error" });

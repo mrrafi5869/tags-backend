@@ -5,6 +5,6 @@ const { getAllTagsAndTasks, getTagAndTask } = require("../controllers/TagsAndTas
 const router = express.Router();
 
 router.get("", getAllTagsAndTasks);
-router.get("/:id", getTagAndTask);
+router.get("/:uniqueCode", getTagAndTask);
 
 module.exports = router;

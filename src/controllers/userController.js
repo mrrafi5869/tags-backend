@@ -34,7 +34,29 @@ const getUserByEmail = async (req, res) => {
     if (user) {
       res.status(200).json(user);
     } else {
-      res.status(404).json({ message: 'User not found' });
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+const updateUserTagsShow = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { tagsShow } = req.body;
+    console.log(id);
+    console.log(tagsShow);
+    const updatedUser = await User.findByIdAndUpdate(id, { tagsShow }, { new: true });
+
+    if (updatedUser) {
+      res.status(200).json({
+        message: "User tagsShow updated successfully",
+        data: updatedUser,
+      });
+    } else {
+      res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -43,37 +65,44 @@ const getUserByEmail = async (req, res) => {
 
 
 const loginWithEmail = async (req, res) => {
-  console.log(req.body);
   const { name, email, phone, password } = req.body;
   try {
     const user = {
-      
-      name, 
+      name,
       email,
       password,
-      phone
-    }
+      phone,
+    };
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(200).json(user);
-    }
-
+    
     // Check if password matches
     if (existingUser && existingUser.password !== password) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+    
+    if (existingUser) {
+      if(existingUser.tagsShow === true) {
+        return res.status(200).json(user);
+      }else{
+        return res.status(201).json(user);
+      }
+      
+    }else{
+      return res.status(404).json({message: "User not found"})
     }
 
-    const loginUser = await User.create(user);
-    res.status(201).json(loginUser);
+    // const loginUser = await User.create(user);
+    // console.log(loginUser);
+    // res.status(201).json(loginUser);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-
 module.exports = {
   getUser,
   loginWithEmail,
   getUserByEmail,
+  updateUserTagsShow,
   getAllUser,
 };
