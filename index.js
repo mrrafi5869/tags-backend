@@ -24,10 +24,12 @@ app.get("/", (req, res) => {
 
 //Routes 
 const authRoute = require("./src/routes/userRoute");
+const tagAndTaskRoute = require("./src/routes/TagAndTaskRoute");
 
 
 // Routes
 app.use("/api/v1/user", authRoute);
+app.use("/api/v1/user", tagAndTaskRoute);
 
 // Handle Error
 app.use(errorHandler);
