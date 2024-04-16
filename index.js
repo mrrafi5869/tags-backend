@@ -29,7 +29,7 @@ const tagAndTaskRoute = require("./src/routes/TagAndTaskRoute");
 
 // Routes
 app.use("/api/v1/user", authRoute);
-app.use("/api/v1/user", tagAndTaskRoute);
+app.use("/api/v1/tags", tagAndTaskRoute);
 
 // Handle Error
 app.use(errorHandler);

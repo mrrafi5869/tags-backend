@@ -8,7 +8,7 @@ const getTagAndTask = async (req, res) => {
     const { id } = req.params;
     const user = await TagsAndTask.findById(id);
     res.status(200).json({
-      message: "User get successfully",
+      message: "Tag And Task get successfully",
       data: user,
     });
   } catch (err) {
@@ -20,7 +20,7 @@ const getAllTagsAndTasks = async (req, res) => {
   try {
     const user = await TagsAndTask.find();
     res.status(200).json({
-      message: "User get successfully",
+      message: "Tags And Tasks get successfully",
       data: user,
     });
   } catch (err) {
