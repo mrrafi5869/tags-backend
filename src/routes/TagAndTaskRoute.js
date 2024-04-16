@@ -1,6 +1,6 @@
 const express = require("express");
 const {  getAllUser } = require("../controllers/userController");
-const { getAllTagsAndTasks, getTagAndTask } = require("../controllers/TagsAndTask");
+const { getAllTagsAndTasks, getTagAndTask } = require("../controllers/TagsAndTaskController");
 
 const router = express.Router();
 
